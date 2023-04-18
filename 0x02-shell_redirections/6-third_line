@@ -1,2 +1,2 @@
 #!/bln/bash
-head -3 iacta | tail -l
+head -3 iacta | tail -1
