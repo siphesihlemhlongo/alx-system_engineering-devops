@@ -1,5 +1,6 @@
 #kill process killmenow
-exec { 'pkill':
-command => 'pkill killmenow',
-provider => 'shell',
+exec { 'kill_process':
+  command     => 'pkill killmenow',
+  refreshonly => true,
+  onlyif      => 'pgrep killmenow',
 }
