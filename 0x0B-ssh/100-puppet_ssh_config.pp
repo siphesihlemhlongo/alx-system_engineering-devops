@@ -3,6 +3,7 @@
 
 file { 'etc/ssh/ssh_config':
 ensure => present,
+
 content => "
 
 #client SSH configuration file
