@@ -1,28 +1,16 @@
 #!/usr/bin/env bash
-#  A Script that configures a new Ubuntu machine
+#  A Script that configures a new Ubuntu machine to Perform a 301-redirection
 
-# Step 1: Install Nginx (if not already installed)
+# Upadating Packages before Installations
 sudo apt-get update
-sudo apt-get install nginx -y
+sudo apt-get install -y nginx
 
-# Step 2: Configure Nginx for redirection
-sudo sh -c 'echo "server {
-    listen 80;
-    server_name localhost;
+# Creating an index.html page
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-    }
+# Performing a 301 Redirection
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/besthor permanent;"
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
 
-    # Add other server configurations if needed
-
-}" > /etc/nginx/sites-available/redirect_me'
-
-# Step 3: Create a symbolic link to enable the site
-sudo ln -s /etc/nginx/sites-available/redirect_me /etc/nginx/sites-enabled
-
-# Step 4: Test Nginx configuration
-sudo nginx -t
-
-# Step 5: Reload Nginx to apply changes
-sudo systemctl reload nginx
+# Restarting Nginx service
+sudo service nginx restart
