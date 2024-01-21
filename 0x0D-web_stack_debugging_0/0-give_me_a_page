@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Fixes a web server to run Nginx as the nginx user listening on port 8080.
+docker run -p 8080:80 -d -it holbertonschool/265-0
+
+# Connect to the running container
+docker exec -it <container_id_or_name> /bin/bash
+
+# Install Apache (if not installed)
+apt-get update
+apt-get install -y apache2
+
+# Start Apache
+service apache2 start
+
+# Create an index.html file with "Hello Holberton"
+echo "Hello Holberton" > /var/www/html/index.html
+
+# Exit the container
+exit

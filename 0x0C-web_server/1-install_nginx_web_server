@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Commands to install Nginx on Web-Sever-01
+# Update and install nginx with -y flag
+apt-get update -y
+apt-get install -y nginx
+
+# Ensure nginx is running
+service nginx start
+
+# Create a simple HTML page with "Hello World!"
+echo "Hello World!" > /var/www/html/index.html
+
+# Replace the default nginx configuration to listen on port 80
+sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+
+# Reload nginx to apply changes
+service nginx reload

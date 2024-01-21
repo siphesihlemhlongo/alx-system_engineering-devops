@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Configures an Nginx server to listen on port 80
+ln -s 's/80/8080/' /etc/nginx/nginx.conf
+service nginx restart
